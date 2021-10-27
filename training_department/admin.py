@@ -43,3 +43,19 @@ class TerritoryAdmin(admin.ModelAdmin):
         model = Territory
 
     list_display = ('name', 'address', )
+
+
+@admin.register(Cabinet)
+class CabinetAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Cabinet
+
+    list_display = ('name', 'number', 'fk_territory')
+
+
+@admin.register(DisciplineOnGroup)
+class DisciplineOnGroupAdmin(admin.ModelAdmin):
+    class Meta:
+        model = DisciplineOnGroup
+
+    list_display = ('fk_edu_dis', 'fk_group', 'fk_cabinet')

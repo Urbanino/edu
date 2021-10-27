@@ -6,7 +6,7 @@ from training_department.models import DisciplineOnGroup
 
 class Lesson(models.Model):
     CHECK_CHOICES = (
-        ('', 'На месте'),
+        ('+', 'На месте'),
         ('н/б', 'Не был'),
         ('н/бу', 'Не был по уважительной причине'),
     )
@@ -15,13 +15,14 @@ class Lesson(models.Model):
         ('4', 'Хорошо'),
         ('3', 'Удовлетворительно'),
         ('2', 'Не удовлетворительно'),
-        ('', 'Нет оценки'),
+        ('-', 'Нет оценки'),
     )
 
     fk_dis_on_group = models.ForeignKey(DisciplineOnGroup, on_delete=models.CASCADE, verbose_name='Занятие')
     fk_user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Студент')
-    check = models.CharField(max_length=40, choices=CHECK_CHOICES, default='', verbose_name='Присутствие')
-    mark = models.CharField(max_length=20, choices=MARK_CHOICES, default='', verbose_name='Присутствие')
+    check = models.CharField(max_length=40, choices=CHECK_CHOICES, default='+', verbose_name='Присутствие')
+    mark = models.CharField(max_length=20, choices=MARK_CHOICES, default='-', verbose_name='Присутствие')
+    date = models.DateField(verbose_name='Дата проведения занятия', auto_now_add=True)
 
     class Meta:
         verbose_name = 'Занятие'

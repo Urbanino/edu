@@ -74,20 +74,23 @@ class Territory(models.Model):
 class Cabinet(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название кабинета')
     number = models.CharField(max_length=15, verbose_name='Номер кабинета')
-    fk_territoty = models.ForeignKey(Territory, on_delete=models.CASCADE, verbose_name='Название территории')
+    fk_territory = models.ForeignKey(Territory, on_delete=models.CASCADE, verbose_name='Название территории')
 
     class Meta:
         verbose_name = 'Кабинет'
         verbose_name_plural = 'Кабинеты'
 
     def __str__(self):
-        return f'{self.number} - {self.fk_territoty}'
+        return f'{self.number} - {self.fk_territory}'
 
 
 class DisciplineOnGroup(models.Model):
-    fk_edu_dis = models.ForeignKey(EducatorDiscipline, on_delete=models.CASCADE)
-    fk_group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    fk_cabinet = models.ForeignKey(Cabinet, on_delete=models.CASCADE)
+    fk_edu_dis = models.ForeignKey(EducatorDiscipline, on_delete=models.CASCADE,
+                                   verbose_name='Преподаватель - дисциплина')
+    fk_group = models.ForeignKey(Group, on_delete=models.CASCADE,
+                                 verbose_name='Группа')
+    fk_cabinet = models.ForeignKey(Cabinet, on_delete=models.CASCADE,
+                                   verbose_name='Кабинет - территория')
 
     class Meta:
         verbose_name = 'Расписание'
